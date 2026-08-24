@@ -12,7 +12,7 @@ function App() {
 
   return (
     <main className="contenedor">
-      <h1>Tienda de Celulares</h1>
+      <h1>Tienda de Celulares React</h1>
       <p>Productos disponibles: {disponibles.length}</p>
       <p>¿Hay productos agotados?: {hayAgotados ? 'Sí' : 'No'}</p>
       <p>Valor del inventario: ${valorInventario.toLocaleString()}</p>
