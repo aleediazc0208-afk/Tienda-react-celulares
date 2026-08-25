@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ProductoCard from './components/productoCard';
+import ProductoCard from './components/ProductoCard';
 import { productos } from './data/productos';
 import './App.css';
 
@@ -11,6 +11,12 @@ function App() {
   const valorInventario = productos.reduce(
     (total, producto) => total + producto.precio * producto.stock,
     0
+  );
+
+  const productosFiltrados = productos.filter(producto =>
+    producto.nombre
+      .toLowerCase()
+      .includes(busqueda.toLowerCase())
   );
 
   return (
@@ -30,7 +36,7 @@ function App() {
         }}
       />
       <section className="productos">
-        {productos.map(producto => (
+        {productosFiltrados.map(producto => (
           <ProductoCard key={producto.id} producto={producto} />
         ))}
       </section>
