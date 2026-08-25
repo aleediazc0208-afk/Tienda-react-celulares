@@ -1,6 +1,6 @@
-
 function calcularTotal(precio, cantidad) {
-  const total = precio * cantidad; 
+  const total = precio * cantidad;
+  return total;
 }
 
 const resultado = calcularTotal(50000, 3);
@@ -136,4 +136,3 @@ console.log(productoActualizado);
 
 const estado = productoActualizado.stock > 0 ? 'Disponible' : 'Agotado';
 console.log(`${productoActualizado.nombre} está: ${estado}`);
-
