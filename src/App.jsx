@@ -67,6 +67,8 @@ function App() {
         Mostrar únicamente disponibles
       </label>
 
+      <p>Productos encontrados: {productosFiltrados.length}</p>
+
       {
         productosFiltrados.length === 0
           ? <p>No se encontraron productos.</p>
