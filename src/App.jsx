@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ProductoCard from './components/ProductoCard';
+import ProductoCard from './components/productoCard';
 import { productos } from './data/productos';
 import './App.css';
 
@@ -35,6 +35,13 @@ function App() {
           setBusqueda(evento.target.value);
         }}
       />
+
+      {
+        productosFiltrados.length === 0
+          ? <p>No se encontraron productos.</p>
+          : null
+      }
+
       <section className="productos">
         {productosFiltrados.map(producto => (
           <ProductoCard key={producto.id} producto={producto} />
