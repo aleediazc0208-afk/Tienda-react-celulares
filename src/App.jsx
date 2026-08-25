@@ -1,8 +1,11 @@
-import ProductoCard from './components/ProductoCard';
+import { useState } from 'react';
+import ProductoCard from './components/productoCard';
 import { productos } from './data/productos';
 import './App.css';
 
 function App() {
+  const [busqueda, setBusqueda] = useState("");
+
   const disponibles = productos.filter(producto => producto.stock > 0);
   const hayAgotados = productos.some(producto => producto.stock === 0);
   const valorInventario = productos.reduce(
@@ -18,6 +21,14 @@ function App() {
       <p>Valor del inventario: ${valorInventario.toLocaleString()}</p>
 
       <h2>Todos los productos</h2>
+      <input
+        type="text"
+        placeholder="Buscar producto..."
+        value={busqueda}
+        onChange={(evento) => {
+          setBusqueda(evento.target.value);
+        }}
+      />
       <section className="productos">
         {productos.map(producto => (
           <ProductoCard key={producto.id} producto={producto} />
