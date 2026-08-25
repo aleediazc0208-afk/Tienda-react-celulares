@@ -5,6 +5,7 @@ import './App.css';
 
 function App() {
   const [busqueda, setBusqueda] = useState("");
+  const [categoria, setCategoria] = useState("Todas");
 
   const disponibles = productos.filter(producto => producto.stock > 0);
   const hayAgotados = productos.some(producto => producto.stock === 0);
@@ -13,11 +14,16 @@ function App() {
     0
   );
 
-  const productosFiltrados = productos.filter(producto =>
-    producto.nombre
+  const productosFiltrados = productos.filter(producto => {
+    const coincideNombre = producto.nombre
       .toLowerCase()
-      .includes(busqueda.toLowerCase())
-  );
+      .includes(busqueda.toLowerCase());
+
+    const coincideCategoria =
+      categoria === "Todas" || producto.categoria === categoria;
+
+    return coincideNombre && coincideCategoria;
+  });
 
   return (
     <main className="contenedor">
@@ -35,6 +41,16 @@ function App() {
           setBusqueda(evento.target.value);
         }}
       />
+
+      <select
+        value={categoria}
+        onChange={(evento) => setCategoria(evento.target.value)}
+      >
+        <option value="Todas">Todas</option>
+        <option value="Gama alta">Gama alta</option>
+        <option value="Gama media">Gama media</option>
+        <option value="Gama baja">Gama baja</option>
+      </select>
 
       {
         productosFiltrados.length === 0
