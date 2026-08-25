@@ -6,6 +6,7 @@ import './App.css';
 function App() {
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
+  const [soloDisponibles, setSoloDisponibles] = useState(false);
 
   const disponibles = productos.filter(producto => producto.stock > 0);
   const hayAgotados = productos.some(producto => producto.stock === 0);
@@ -22,7 +23,10 @@ function App() {
     const coincideCategoria =
       categoria === "Todas" || producto.categoria === categoria;
 
-    return coincideNombre && coincideCategoria;
+    const coincideStock =
+      !soloDisponibles || producto.stock > 0;
+
+    return coincideNombre && coincideCategoria && coincideStock;
   });
 
   return (
@@ -51,6 +55,17 @@ function App() {
         <option value="Gama media">Gama media</option>
         <option value="Gama baja">Gama baja</option>
       </select>
+
+      <label>
+        <input
+          type="checkbox"
+          checked={soloDisponibles}
+          onChange={(evento) =>
+            setSoloDisponibles(evento.target.checked)
+          }
+        />
+        Mostrar únicamente disponibles
+      </label>
 
       {
         productosFiltrados.length === 0
