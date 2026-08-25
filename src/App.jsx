@@ -1,3 +1,6 @@
+// escogi opcion E (contador de agotados con reduce) y opcion F (boton "limpiar filtros")
+
+
 import { useState } from 'react';
 import ProductoCard from './components/productoCard';
 import { productos } from './data/productos';
@@ -15,6 +18,11 @@ function App() {
     0
   );
 
+  const cantidadAgotados = productos.reduce(
+    (total, producto) => producto.stock === 0 ? total + 1 : total,
+    0
+  );
+
   const productosFiltrados = productos.filter(producto => {
     const coincideNombre = producto.nombre
       .toLowerCase()
@@ -29,11 +37,18 @@ function App() {
     return coincideNombre && coincideCategoria && coincideStock;
   });
 
+  const limpiarFiltros = () => {
+    setBusqueda("");
+    setCategoria("Todas");
+    setSoloDisponibles(false);
+  };
+
   return (
     <main className="contenedor">
       <h1>Tienda de Celulares React</h1>
       <p>Productos disponibles: {disponibles.length}</p>
       <p>¿Hay productos agotados?: {hayAgotados ? 'Sí' : 'No'}</p>
+      <p>Cantidad de productos agotados: {cantidadAgotados}</p>
       <p>Valor del inventario: ${valorInventario.toLocaleString()}</p>
 
       <h2>Todos los productos</h2>
@@ -66,6 +81,10 @@ function App() {
         />
         Mostrar únicamente disponibles
       </label>
+
+      <button onClick={limpiarFiltros}>
+        Limpiar filtros
+      </button>
 
       <p>Productos encontrados: {productosFiltrados.length}</p>
 
