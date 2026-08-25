@@ -13,12 +13,16 @@ function ProductoCard({ producto }) {
     alert(`Seleccionaste ${nombre}`);
   };
 
+  const formatearPrecio = precio => {
+    return precio.toLocaleString("es-CO");
+  };
+
   return (
     <article className="producto-card">
       <img src={imagen} alt={nombre} className="producto-imagen" />
       <h2>{nombre}</h2>
       <p>Categoría: {categoria}</p>
-      <p>Precio: ${precio.toLocaleString()}</p>
+      <p>Precio: ${formatearPrecio(precio)}</p>
       <p>Stock: {stock}</p>
       <strong>{estado}</strong>
       <br />
